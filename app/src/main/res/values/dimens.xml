@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="chart_grid_lines_stroke">1dp</dimen>
+    <dimen name="chart_values_line_stroke">3dp</dimen>
+</resources>
