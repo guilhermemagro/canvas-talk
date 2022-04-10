@@ -10,4 +10,5 @@
 
     <color name="chart_grid_lines">#DADCE0</color>
     <color name="chart_values_line">#229922</color>
+    <color name="chart_values_description_background">#50229922</color>
 </resources>

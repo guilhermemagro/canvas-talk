@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         ChartData(32, "R$ 32,00", "12/01/2022"),
         ChartData(20, "R$ 20,00", "13/01/2022"),
         ChartData(17, "R$ 17,00", "14/01/2022"),
-        ChartData(38, "R$ 38,00", "15/01/2022"),
+        ChartData(5, "R$ 5,00", "15/01/2022"),
         ChartData(41, "R$ 41,00", "16/01/2022"),
         ChartData(43, "R$ 43,00", "17/01/2022"),
         ChartData(37, "R$ 37,00", "18/01/2022"),
