@@ -28,6 +28,12 @@ class MyChart @JvmOverloads constructor(
     private var unitaryWidth = 0F
     private var gridLinesPoints: List<Pair<PointF, PointF>>? = null
     private var chartElements: List<ChartElement>? = null
+    private var descriptionPadding: Float = resources.getDimension(
+        R.dimen.chart_description_padding
+    )
+    private var descriptionCornerRadius: Float = resources.getDimension(
+        R.dimen.chart_description_radius
+    )
 
     private val gridLinesPaint = Paint().apply {
         isAntiAlias = true
@@ -212,28 +218,33 @@ class MyChart @JvmOverloads constructor(
             )
             titleTextBound.union(descriptionTextBound)
             val resultRect = RectF(
-                (titleTextBound.left - 20).toFloat(),
-                (titleTextBound.top * 2 - 20).toFloat(),
-                (titleTextBound.right + 20).toFloat(),
-                (titleTextBound.bottom + 20).toFloat()
+                titleTextBound.left - descriptionPadding,
+                titleTextBound.top * 2 - descriptionPadding,
+                titleTextBound.right + descriptionPadding,
+                titleTextBound.bottom + descriptionPadding
             )
             resultRect.offsetTo(
                 selected.pathPoint.x - (resultRect.width() / 2),
                 selected.pathPoint.y - resultRect.height() - 20
             )
-            drawRoundRect(resultRect, 10F, 10F, descriptionBackgroundPaint)
+            drawRoundRect(
+                resultRect,
+                descriptionCornerRadius,
+                descriptionCornerRadius,
+                descriptionBackgroundPaint
+            )
 
             // Text
             drawText(
                 selected.chartData.description,
-                resultRect.centerX().toFloat(),
-                resultRect.centerY().toFloat(),
+                resultRect.centerX(),
+                resultRect.centerY(),
                 descriptionTextPaint
             )
             drawText(
                 selected.chartData.title,
-                resultRect.centerX().toFloat(),
-                resultRect.bottom.toFloat() - 20,
+                resultRect.centerX(),
+                resultRect.bottom - descriptionPadding,
                 descriptionTextPaint
             )
         }
