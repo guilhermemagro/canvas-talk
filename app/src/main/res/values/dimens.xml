@@ -3,7 +3,8 @@
     <dimen name="chart_grid_lines_stroke">1dp</dimen>
     <dimen name="chart_values_line_stroke">3dp</dimen>
     <dimen name="chart_selection_circle_radius">5dp</dimen>
-    <dimen name="chart_description_text_size">14sp</dimen>
-    <dimen name="chart_description_padding">8dp</dimen>
-    <dimen name="chart_description_radius">8dp</dimen>
+    <dimen name="chart_label_text_size">14sp</dimen>
+    <dimen name="chart_label_margin">8dp</dimen>
+    <dimen name="chart_label_padding">8dp</dimen>
+    <dimen name="chart_label_radius">8dp</dimen>
 </resources>

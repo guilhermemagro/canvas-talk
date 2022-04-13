@@ -10,7 +10,6 @@ import android.graphics.Rect
 import android.graphics.RectF
 import android.graphics.Typeface
 import android.util.AttributeSet
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -28,11 +27,14 @@ class MyChart @JvmOverloads constructor(
     private var unitaryWidth = 0F
     private var gridLinesPoints: List<Pair<PointF, PointF>>? = null
     private var chartElements: List<ChartElement>? = null
-    private var descriptionPadding: Float = resources.getDimension(
-        R.dimen.chart_description_padding
+    private var labelMargin: Float = resources.getDimension(
+        R.dimen.chart_label_margin
     )
-    private var descriptionCornerRadius: Float = resources.getDimension(
-        R.dimen.chart_description_radius
+    private var labelPadding: Float = resources.getDimension(
+        R.dimen.chart_label_padding
+    )
+    private var labelCornerRadius: Float = resources.getDimension(
+        R.dimen.chart_label_radius
     )
 
     private val gridLinesPaint = Paint().apply {
@@ -46,7 +48,7 @@ class MyChart @JvmOverloads constructor(
         isAntiAlias = true
         color = ContextCompat.getColor(context, R.color.chart_grid_lines)
         typeface = Typeface.create(Typeface.SANS_SERIF, Typeface.NORMAL)
-        textSize = resources.getDimension(R.dimen.chart_description_text_size)
+        textSize = resources.getDimension(R.dimen.chart_label_text_size)
         textAlign = Paint.Align.LEFT
     }
 
@@ -65,17 +67,17 @@ class MyChart @JvmOverloads constructor(
         style = Paint.Style.FILL
     }
 
-    private val descriptionBackgroundPaint = Paint().apply {
+    private val labelBackgroundPaint = Paint().apply {
         isAntiAlias = true
-        color = ContextCompat.getColor(context, R.color.chart_values_description_background)
+        color = ContextCompat.getColor(context, R.color.chart_values_label_background)
         style = Paint.Style.FILL
     }
 
-    private val descriptionTextPaint = Paint().apply {
+    private val labelTextPaint = Paint().apply {
         isAntiAlias = true
         color = ContextCompat.getColor(context, R.color.black)
         typeface = Typeface.create(Typeface.SANS_SERIF, Typeface.NORMAL)
-        textSize = resources.getDimension(R.dimen.chart_description_text_size)
+        textSize = resources.getDimension(R.dimen.chart_label_text_size)
         textAlign = Paint.Align.CENTER
     }
 
@@ -204,13 +206,13 @@ class MyChart @JvmOverloads constructor(
             // Background
             val titleTextBound = Rect()
             val descriptionTextBound = Rect()
-            descriptionTextPaint.getTextBounds(
+            labelTextPaint.getTextBounds(
                 selected.chartData.title,
                 0,
                 selected.chartData.title.length,
                 titleTextBound
             )
-            descriptionTextPaint.getTextBounds(
+            labelTextPaint.getTextBounds(
                 selected.chartData.description,
                 0,
                 selected.chartData.description.length,
@@ -218,34 +220,34 @@ class MyChart @JvmOverloads constructor(
             )
             titleTextBound.union(descriptionTextBound)
             val resultRect = RectF(
-                titleTextBound.left - descriptionPadding,
-                titleTextBound.top * 2 - descriptionPadding,
-                titleTextBound.right + descriptionPadding,
-                titleTextBound.bottom + descriptionPadding
+                titleTextBound.left - labelPadding,
+                titleTextBound.top - titleTextBound.height() - labelPadding,
+                titleTextBound.right + labelPadding,
+                titleTextBound.bottom + labelPadding
             )
             resultRect.offsetTo(
                 selected.pathPoint.x - (resultRect.width() / 2),
-                selected.pathPoint.y - resultRect.height() - 20
+                selected.pathPoint.y - resultRect.height() - labelMargin
             )
             drawRoundRect(
                 resultRect,
-                descriptionCornerRadius,
-                descriptionCornerRadius,
-                descriptionBackgroundPaint
+                labelCornerRadius,
+                labelCornerRadius,
+                labelBackgroundPaint
             )
 
             // Text
             drawText(
-                selected.chartData.description,
-                resultRect.centerX(),
-                resultRect.centerY(),
-                descriptionTextPaint
-            )
-            drawText(
                 selected.chartData.title,
                 resultRect.centerX(),
-                resultRect.bottom - descriptionPadding,
-                descriptionTextPaint
+                resultRect.centerY(),
+                labelTextPaint
+            )
+            drawText(
+                selected.chartData.description,
+                resultRect.centerX(),
+                resultRect.bottom - labelPadding,
+                labelTextPaint
             )
         }
     }
