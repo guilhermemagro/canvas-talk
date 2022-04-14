@@ -169,7 +169,7 @@ class MyChart @JvmOverloads constructor(
                 )
                 if (unitaryGridHeight > 0) {
                     drawText(
-                        ((GRID_LINES_NUMBER) * unitaryGridHeight - ((index) * unitaryGridHeight)).toString(),
+                        ((GRID_LINES_NUMBER - index) * unitaryGridHeight).toString(),
                         linePoints.first.x,
                         linePoints.first.y,
                         gridTextPaint
