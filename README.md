@@ -13,4 +13,5 @@
 - <https://developer.android.com/reference/android/graphics/Canvas>
 - <https://developer.android.com/guide/topics/graphics>
 - <https://developer.android.com/reference/android/graphics/package-summary>
+- <https://developer.android.com/guide/topics/ui/how-android-draws>
 - <https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes>
